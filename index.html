@@ -44,34 +44,11 @@
   .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; }
   .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem,4vw,2.6rem); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1rem; }
   .divider { width: 40px; height: 3px; background: var(--blue); border-radius: 2px; margin-bottom: 2.5rem; }
-/* Change grid to a single column to let text span the full width */
-.about-grid { 
-  display: block; 
-  max-width: 800px; /* Slightly narrower than the section for better readability */
-  margin: 0 auto; 
-}
 
-/* Center the text and the paragraph themselves */
-.about-text {
-  text-align: center;
-}
-
-.about-text p { 
-  color: var(--text-muted); 
-  font-size: 1.1rem; /* Slightly larger for a hero-style about section */
-  line-height: 1.8; 
-  margin-bottom: 1.5rem; 
-  font-weight: 300; 
-}
-
-.about-text p strong { 
-  color: var(--text); 
-  font-weight: 500; 
-}
-  .about-stats { display: flex; flex-direction: column; gap: 1rem; }
-  .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.4rem; border-left: 3px solid var(--blue); }
-  .stat-value { font-size: 1.8rem; font-weight: 600; color: var(--blue); line-height: 1; }
-  .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+  /* ABOUT — full-width single column */
+  .about-text p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 1rem; font-weight: 300; max-width: 640px; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
 
   .cp-banner { background: #eef4ff; border: 1px solid #c7daf9; border-radius: var(--radius); padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 14px; margin-bottom: 2rem; }
   .cp-banner-icon { font-size: 1.6rem; flex-shrink: 0; }
@@ -136,7 +113,7 @@
   footer { text-align: center; padding: 2rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--text-hint); border-top: 1px solid var(--border); }
 
   @media (max-width: 640px) {
-    .about-grid, .contact-wrapper { grid-template-columns: 1fr; }
+    .contact-wrapper { grid-template-columns: 1fr; }
     nav { padding: 0 1rem; }
     .nav-links { gap: 1rem; }
     .nav-links a { font-size: 0.72rem; }
@@ -194,13 +171,10 @@
       <strong>Competitive programmer</strong> — I love solving algorithmic challenges and pushing my problem-solving skills. Find me on Codeforces as <span class="cf-handle">realaditya_24</span>, working my way up one problem at a time.
     </div>
   </div>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>Hi! I'm <strong>Aditya</strong>, a student at IIT Roorkee pursuing an integrated Masters & Bachelors in <strong>Mathematics and Computing</strong>. I enjoy writing clean, efficient code and thinking rigorously about problems.</p>
-      <p>My passion for <strong>competitive programming</strong> keeps me sharp — I regularly tackle algorithmic problems that sharpen my understanding of data structures, graph theory, and optimisation.</p>
-      <p>I'm especially drawn to the intersection of <strong>mathematics and finance</strong> — building tools like options pricers and trading simulators that apply probability theory to real markets.</p>
-    </div>
-    
+  <div class="about-text">
+    <p>Hi! I'm <strong>Aditya</strong>, a student at IIT Roorkee pursuing an integrated Masters & Bachelors in <strong>Mathematics and Computing</strong>. I enjoy writing clean, efficient code and thinking rigorously about problems.</p>
+    <p>My passion for <strong>competitive programming</strong> keeps me sharp — I regularly tackle algorithmic problems that sharpen my understanding of data structures, graph theory, and optimisation.</p>
+    <p>I'm especially drawn to the intersection of <strong>mathematics and finance</strong> — building tools like options pricers and trading simulators that apply probability theory to real markets.</p>
   </div>
 </section>
 
