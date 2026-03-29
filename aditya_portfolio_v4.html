@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aditya Kumar Pandit</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue: #1a6fd4; --blue-light: #e8f0fd; --text: #0f172a;
+    --text-muted: #64748b; --text-hint: #94a3b8;
+    --bg: #ffffff; --bg2: #f8fafc; --border: rgba(15,23,42,0.08); --radius: 12px;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+  .nav-logo span { color: var(--blue); }
+  .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+  .nav-links a { text-decoration: none; font-size: 0.82rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--blue); }
+
+  #hero { min-height: 100vh; display: flex; align-items: center; padding: 80px 2rem 4rem; max-width: 900px; margin: 0 auto; }
+  .hero-inner { width: 100%; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--blue-light); color: var(--blue); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 1.5rem; }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:0.3;} }
+  .hero-name { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem,7vw,5rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.2rem; }
+  .hero-name .accent { color: var(--blue); font-style: italic; }
+  .hero-desc { font-size: 1.1rem; color: var(--text-muted); max-width: 540px; line-height: 1.75; margin-bottom: 2.5rem; font-weight: 300; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.15s; border: none; cursor: pointer; font-family: 'Outfit', sans-serif; }
+  .btn-primary:hover { background: #1557b0; transform: translateY(-1px); }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text); padding: 12px 24px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; text-decoration: none; border: 1.5px solid var(--border); transition: border-color 0.2s, transform 0.15s; cursor: pointer; font-family: 'Outfit', sans-serif; }
+  .btn-secondary:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+
+  .hero-socials { display: flex; gap: 10px; flex-wrap: wrap; }
+  .social-pill { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 100px; border: 1px solid var(--border); font-size: 0.82rem; font-weight: 500; color: var(--text-muted); text-decoration: none; background: var(--bg2); transition: all 0.2s; }
+  .social-pill:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); transform: translateY(-1px); }
+
+  section { padding: 6rem 2rem; max-width: 900px; margin: 0 auto; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem,4vw,2.6rem); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1rem; }
+  .divider { width: 40px; height: 3px; background: var(--blue); border-radius: 2px; margin-bottom: 2.5rem; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .about-text p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 1rem; font-weight: 300; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-stats { display: flex; flex-direction: column; gap: 1rem; }
+  .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.4rem; border-left: 3px solid var(--blue); }
+  .stat-value { font-size: 1.8rem; font-weight: 600; color: var(--blue); line-height: 1; }
+  .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
+  .cp-banner { background: #eef4ff; border: 1px solid #c7daf9; border-radius: var(--radius); padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 14px; margin-bottom: 2rem; }
+  .cp-banner-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .cp-banner-text { font-size: 0.92rem; color: #1e40af; font-weight: 400; line-height: 1.6; }
+  .cp-banner-text strong { font-weight: 600; }
+  .cf-handle { font-family: 'DM Mono', monospace; font-size: 0.82rem; background: #dbeafe; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; }
+
+  /* EDUCATION TIMELINE */
+  .edu-timeline { position: relative; padding-left: 28px; }
+  .edu-timeline::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--border); border-radius: 2px; }
+  .edu-item { position: relative; margin-bottom: 2rem; }
+  .edu-item:last-child { margin-bottom: 0; }
+  .edu-dot { position: absolute; left: -25px; top: 5px; width: 14px; height: 14px; border-radius: 50%; background: var(--blue-light); border: 2px solid var(--blue); flex-shrink: 0; }
+  .edu-dot.current { background: var(--blue); box-shadow: 0 0 0 4px var(--blue-light); }
+  .edu-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.6rem; transition: border-color 0.2s; }
+  .edu-card:hover { border-color: var(--blue); }
+  .edu-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+  .edu-degree { font-weight: 600; font-size: 0.98rem; color: var(--text); }
+  .edu-badge { font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 500; padding: 3px 10px; border-radius: 100px; white-space: nowrap; }
+  .edu-badge.score { background: #dcfce7; color: #15803d; }
+  .edu-badge.current { background: var(--blue-light); color: var(--blue); }
+  .edu-school { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .edu-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .edu-year { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-hint); }
+  .edu-board { font-size: 0.78rem; color: var(--text-hint); }
+  .edu-location { font-size: 0.78rem; color: var(--text-hint); display: flex; align-items: center; gap: 3px; }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .skill-group { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+  .skill-group-title { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-hint); margin-bottom: 1rem; }
+  .skill-item { margin-bottom: 0.9rem; }
+  .skill-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+  .skill-name { font-size: 0.88rem; font-weight: 500; color: var(--text); }
+  .skill-pct { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--text-hint); }
+  .skill-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .skill-fill { height: 100%; background: var(--blue); border-radius: 2px; transition: width 1.5s cubic-bezier(0.4,0,0.2,1); width: 0; }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem; transition: border-color 0.2s, transform 0.2s; display: flex; flex-direction: column; }
+  .project-card:hover { border-color: var(--blue); transform: translateY(-3px); }
+  .project-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1rem; }
+  .project-icon { width: 40px; height: 40px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .project-gh { display: inline-flex; align-items: center; gap: 5px; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-hint); text-decoration: none; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); transition: all 0.2s; }
+  .project-gh:hover { color: var(--blue); border-color: var(--blue); background: var(--blue-light); }
+  .project-title { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; }
+  .project-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.2rem; font-weight: 300; flex: 1; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-family: 'DM Mono', monospace; font-size: 0.7rem; background: var(--bg2); color: var(--text-muted); padding: 3px 10px; border-radius: 4px; border: 1px solid var(--border); }
+
+  .contact-wrapper { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .contact-info h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .contact-info p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; font-weight: 300; margin-bottom: 1.5rem; }
+  .contact-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-muted); font-size: 0.88rem; margin-bottom: 0.8rem; transition: color 0.2s; }
+  .contact-link:hover { color: var(--blue); }
+  .contact-link-icon { width: 34px; height: 34px; background: white; border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-link-text { font-size: 0.85rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-form input, .contact-form textarea { width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.9rem; background: white; color: var(--text); outline: none; transition: border-color 0.2s; resize: none; }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--blue); }
+  .contact-form textarea { height: 110px; }
+
+  footer { text-align: center; padding: 2rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--text-hint); border-top: 1px solid var(--border); }
+
+  @media (max-width: 640px) {
+    .about-grid, .contact-wrapper { grid-template-columns: 1fr; }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.72rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">AKP<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Open to opportunities</div>
+    <h1 class="hero-name">Aditya Kumar<br><span class="accent">Pandit.</span></h1>
+    <p class="hero-desc">Student at IIT Roorkee pursuing Mathematics & Computing — with a passion for competitive programming, probability theory, and financial modelling.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View my work →</a>
+      <a href="#contact" class="btn-secondary">Get in touch</a>
+    </div>
+    <div class="hero-socials">
+      <a href="https://github.com/droid-adi" class="social-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.74-1.33-1.74-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.06 1.82 2.78 1.3 3.46.99.1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        droid-adi
+      </a>
+      <a href="https://www.linkedin.com/in/aditya-pandit-92a182329/" class="social-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#0077b5"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://codeforces.com/profile/realaditya_24" class="social-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#1a6fd4"><rect x="0" y="10" width="6" height="14" rx="1"/><rect x="9" y="4" width="6" height="20" rx="1"/><rect x="18" y="7" width="6" height="17" rx="1"/></svg>
+        realaditya_24
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">01 / about</p>
+  <h2 class="section-title">A bit about me</h2>
+  <div class="divider"></div>
+  <div class="cp-banner">
+    <div class="cp-banner-icon">⚡</div>
+    <div class="cp-banner-text">
+      <strong>Competitive programmer</strong> — I love solving algorithmic challenges and pushing my problem-solving skills. Find me on Codeforces as <span class="cf-handle">realaditya_24</span>, working my way up one problem at a time.
+    </div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Hi! I'm <strong>Aditya</strong>, a student at IIT Roorkee pursuing an integrated Masters & Bachelors in <strong>Mathematics and Computing</strong>. I enjoy writing clean, efficient code and thinking rigorously about problems.</p>
+      <p>My passion for <strong>competitive programming</strong> keeps me sharp — I regularly tackle algorithmic problems that sharpen my understanding of data structures, graph theory, and optimisation.</p>
+      <p>I'm especially drawn to the intersection of <strong>mathematics and finance</strong> — building tools like options pricers and trading simulators that apply probability theory to real markets.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card"><div class="stat-value">96.6%</div><div class="stat-label">Class X — CBSE</div></div>
+      <div class="stat-card"><div class="stat-value">91.6%</div><div class="stat-label">Class XII — CBSE</div></div>
+      <div class="stat-card"><div class="stat-value">IIT-R</div><div class="stat-label">Mathematics & Computing, 2024–29</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">02 / education</p>
+  <h2 class="section-title">Academic journey</h2>
+  <div class="divider"></div>
+  <div class="edu-timeline">
+
+    <div class="edu-item">
+      <div class="edu-dot current"></div>
+      <div class="edu-card">
+        <div class="edu-header">
+          <div class="edu-degree">Integrated M.Sc. — Mathematics and Computing</div>
+          <span class="edu-badge current">2024 – 2029</span>
+        </div>
+        <div class="edu-school">Indian Institute of Technology Roorkee (IIT Roorkee)</div>
+        <div class="edu-meta">
+          <span class="edu-location">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Roorkee, Uttarakhand, India
+          </span>
+          <span class="edu-board">· Currently in progress</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-dot"></div>
+      <div class="edu-card">
+        <div class="edu-header">
+          <div class="edu-degree">Class XII — Science (CBSE)</div>
+          <span class="edu-badge score">91.6%</span>
+        </div>
+        <div class="edu-school">Burnpur Riverside School</div>
+        <div class="edu-meta">
+          <span class="edu-year">2024</span>
+          <span class="edu-board">· CBSE Board</span>
+          <span class="edu-location">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Chittaranjan, West Bengal, India
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-dot"></div>
+      <div class="edu-card">
+        <div class="edu-header">
+          <div class="edu-degree">Class X (CBSE)</div>
+          <span class="edu-badge score">96.6%</span>
+        </div>
+        <div class="edu-school">Burnpur Riverside School</div>
+        <div class="edu-meta">
+          <span class="edu-year">2022</span>
+          <span class="edu-board">· CBSE Board</span>
+          <span class="edu-location">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Chittaranjan, West Bengal, India
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">03 / skills</p>
+  <h2 class="section-title">What I work with</h2>
+  <div class="divider"></div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">C / C++</span><span class="skill-pct">75%</span></div><div class="skill-bar"><div class="skill-fill" data-w="75"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Python</span><span class="skill-pct">70%</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">JavaScript</span><span class="skill-pct">60%</span></div><div class="skill-bar"><div class="skill-fill" data-w="60"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Competitive Programming</div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Problem solving</span><span class="skill-pct">72%</span></div><div class="skill-bar"><div class="skill-fill" data-w="72"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Data structures</span><span class="skill-pct">68%</span></div><div class="skill-bar"><div class="skill-fill" data-w="68"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Algorithms</span><span class="skill-pct">65%</span></div><div class="skill-bar"><div class="skill-fill" data-w="65"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Mathematics</div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Probability theory</span><span class="skill-pct">72%</span></div><div class="skill-bar"><div class="skill-fill" data-w="72"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Statistics</span><span class="skill-pct">68%</span></div><div class="skill-bar"><div class="skill-fill" data-w="68"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Linear algebra</span><span class="skill-pct">55%</span></div><div class="skill-bar"><div class="skill-fill" data-w="55"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">04 / projects</p>
+  <h2 class="section-title">Things I've built</h2>
+  <div class="divider"></div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-card-top">
+        <div class="project-icon">📈</div>
+        <a href="https://github.com/droid-adi/stock-portfolio-simulator" class="project-gh">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.74-1.33-1.74-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.06 1.82 2.78 1.3 3.46.99.1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <div class="project-title">Live Trading Simulator</div>
+      <div class="project-desc">A real-time stock portfolio simulator that lets you trade with live market data, track P&L, and practice strategies risk-free.</div>
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">Finance</span><span class="tag">Live Data</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-card-top">
+        <div class="project-icon">🧮</div>
+        <a href="https://github.com/droid-adi/black-scholes" class="project-gh">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.74-1.33-1.74-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.06 1.82 2.78 1.3 3.46.99.1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <div class="project-title">Black-Scholes Pricer</div>
+      <div class="project-desc">An options pricing tool implementing the Black-Scholes model — compute call/put prices, Greeks, and visualise the volatility surface.</div>
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">Probability</span><span class="tag">Options</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-card-top">
+        <div class="project-icon">💳</div>
+        <a href="https://github.com/droid-adi/Makers" class="project-gh">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.74-1.33-1.74-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.06 1.82 2.78 1.3 3.46.99.1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <div class="project-title">PhonePe UPI Statement Analyzer</div>
+      <div class="project-desc">Parses and analyses PhonePe UPI transaction statements — categorises spending, surfaces trends, and generates readable summaries.</div>
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">Data Analysis</span><span class="tag">UPI</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">05 / contact</p>
+  <h2 class="section-title">Let's connect</h2>
+  <div class="divider"></div>
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <h3>Say hello 👋</h3>
+      <p>Whether you have a project idea, want to collaborate, or just want to talk competitive programming and markets — I'm always happy to chat.</p>
+      <a href="mailto:aditya_kp@ma.iitr.ac.in" class="contact-link">
+        <span class="contact-link-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+        <span class="contact-link-text">aditya_kp@ma.iitr.ac.in</span>
+      </a>
+      <a href="tel:+918709253306" class="contact-link">
+        <span class="contact-link-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16z"/></svg></span>
+        <span class="contact-link-text">+91 8709253306</span>
+      </a>
+      <a href="https://maps.google.com/?q=Roorkee,Uttarakhand,India" class="contact-link">
+        <span class="contact-link-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+        <span class="contact-link-text">Roorkee, Uttarakhand, India</span>
+      </a>
+      <a href="https://github.com/droid-adi" class="contact-link">
+        <span class="contact-link-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.74-1.33-1.74-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.06 1.82 2.78 1.3 3.46.99.1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg></span>
+        <span class="contact-link-text">github.com/droid-adi</span>
+      </a>
+      <a href="https://codeforces.com/profile/realaditya_24" class="contact-link">
+        <span class="contact-link-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="#1a6fd4"><rect x="0" y="10" width="6" height="14" rx="1"/><rect x="9" y="4" width="6" height="20" rx="1"/><rect x="18" y="7" width="6" height="17" rx="1"/></svg></span>
+        <span class="contact-link-text">cf / realaditya_24</span>
+      </a>
+    </div>
+    <div class="contact-form">
+      <input type="text" placeholder="Your name" />
+      <input type="email" placeholder="Your email" />
+      <textarea placeholder="Your message..."></textarea>
+      <button class="btn-primary" style="align-self:flex-start;" onclick="this.textContent='Sent! ✓'; this.style.background='#16a34a';">Send message →</button>
+    </div>
+  </div>
+</section>
+
+<footer>Designed & built by Aditya Kumar Pandit · 2025</footer>
+
+<script>
+  const fills = document.querySelectorAll('.skill-fill');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.width = e.target.dataset.w + '%'; obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.2 });
+  fills.forEach(f => obs.observe(f));
+</script>
+</body>
+</html>
