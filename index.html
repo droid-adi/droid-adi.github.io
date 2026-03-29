@@ -44,18 +44,30 @@
   .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; }
   .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem,4vw,2.6rem); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1rem; }
   .divider { width: 40px; height: 3px; background: var(--blue); border-radius: 2px; margin-bottom: 2.5rem; }
+/* Change grid to a single column to let text span the full width */
+.about-grid { 
+  display: block; 
+  max-width: 800px; /* Slightly narrower than the section for better readability */
+  margin: 0 auto; 
+}
 
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;  }
-  
+/* Center the text and the paragraph themselves */
+.about-text {
+  text-align: center;
+}
+
 .about-text p { 
   color: var(--text-muted); 
-  font-size: 1rem; 
+  font-size: 1.1rem; /* Slightly larger for a hero-style about section */
   line-height: 1.8; 
-  margin-bottom: 1rem; 
+  margin-bottom: 1.5rem; 
   font-weight: 300; 
-  text-align: center; 
 }
-  .about-text p strong { color: var(--text); font-weight: 500; }
+
+.about-text p strong { 
+  color: var(--text); 
+  font-weight: 500; 
+}
   .about-stats { display: flex; flex-direction: column; gap: 1rem; }
   .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.4rem; border-left: 3px solid var(--blue); }
   .stat-value { font-size: 1.8rem; font-weight: 600; color: var(--blue); line-height: 1; }
